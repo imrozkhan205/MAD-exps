@@ -129,53 +129,118 @@
 
 // Implementation of Flutter Form and validations.
 
+// import 'package:flutter/material.dart';
+
+// class HomePage extends StatefulWidget {
+//   const HomePage({super.key});
+
+//   @override
+//   State<HomePage> createState() => _HomePageState();
+// }
+
+// class _HomePageState extends State<HomePage> {
+//   final _formKey = GlobalKey<FormState>();
+//   final _nameController = TextEditingController();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: Text('Simple form')),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Form(
+//           key: _formKey,
+//           child: Column(
+//             children: [
+//               TextFormField(
+//                 controller: _nameController,
+//                 decoration: const InputDecoration(labelText: 'Name'),
+//                 validator: (value) {
+//                   if (value == null || value.isEmpty) {
+//                     return 'Please enter your name';
+//                   }
+//                   return null;
+//                 },
+//               ),
+//               const SizedBox(height: 20),
+//               ElevatedButton(
+//                 onPressed: () {
+//                   if (_formKey.currentState!.validate()) {
+//                     ScaffoldMessenger.of(context).showSnackBar(
+//                       SnackBar(
+//                         content: Text('Hello, ${_nameController.text}!'),
+//                       ),
+//                     );
+//                   }
+//                 },
+//                 child: const Text('submit'),
+//               ),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// Implementation of Flutter routing and gesture.
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Routing and Gesture demo',
+      home: const FirstPage(),
+    );
+  }
 }
 
-class _HomePageState extends State<HomePage> {
-  final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
+class FirstPage extends StatelessWidget {
+  const FirstPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Simple form')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Name'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Hello, ${_nameController.text}!'),
-                      ),
-                    );
-                  }
-                },
-                child: const Text('submit'),
-              ),
-            ],
+      appBar: AppBar(title: Text('First page')),
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SecondPage()),
+            );
+          },
+          child: Container(
+            padding: const EdgeInsets.all(20),
+            color: Colors.blue,
+            child: const Text(
+              'Tap to go to second page',
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Second page')),
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          color: Colors.amberAccent,
+          child: const Text(
+            'You are on the second page',
+            style: TextStyle(color: Colors.white, fontSize: 22),
           ),
         ),
       ),
